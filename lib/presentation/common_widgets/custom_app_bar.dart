@@ -27,7 +27,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
       leading: IconButton(onPressed: () {}, icon: Icon(appBarLeading)),
       actions: [Padding(
         padding: const EdgeInsets.only(right: 10),
-        child: IconButton(onPressed: () {}, icon: Icon(appBarAction,size: 28,)),
+        child: IconButton(onPressed: () {}, icon: Icon(appBarAction,size: 28)),
       )],
     );
   }
