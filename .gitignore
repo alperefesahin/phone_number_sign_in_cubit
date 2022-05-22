@@ -25,3 +25,12 @@ doc/api/
 
 .flutter-plugins
 .flutter-plugins-dependencies
+
+## Custom
+# Google API key and other resources
+GoogleService-Info.plist
+google-services.json
+firebase_options.dart
+firebase_app_id_file.json
+# Plugins (already resolved through pubspec.yaml)
+.flutter-plugins
