@@ -19,7 +19,12 @@ class BottomSectionOfThePage extends StatelessWidget {
       builder: (context, state) {
         return SingleChildScrollView(
           child: Container(
-            padding: EdgeInsets.only(top: size.height / 3, right: 25, left: 25, bottom: 25),
+            padding: EdgeInsets.only(
+              top: size.height / 3,
+              right: 25,
+              left: 25,
+              bottom: 25,
+            ),
             child: SizedBox(
               height: size.height / 2,
               width: size.width,
@@ -53,14 +58,14 @@ class BottomSectionOfThePage extends StatelessWidget {
                         minFontSize: 15,
                         maxFontSize: 20,
                         textAlign: TextAlign.center,
-                        style: TextStyle(color: greyColor),
+                        style: TextStyle(color: customGreyColor),
                       ),
                     ),
                     InkWell(
                       onTap: () {
                         if (state.isPhoneNumberInputValidated) {
                           AutoRouter.of(context).navigate(
-                            SignInValidationRoute(phoneNumber: state.phoneNumber),
+                            const SignInVerificationRoute(),
                           );
                         }
                       },

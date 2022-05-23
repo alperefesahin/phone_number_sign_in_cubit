@@ -1,12 +1,16 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:phone_number_sign_in/presentation/common_widgets/colors.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   CustomAppBar({
     Key? key,
     required this.appBarTitle,
     required this.appBarAction,
+    required this.appBarBackgroundColor,
+    required this.appBarIconColor,
     this.appBarLeading,
+    this.appBarTitleTextStyle,
+    this.leadingOnPressed,
   })  : preferredSize = const Size.fromHeight(70.0),
         super(key: key);
 
@@ -15,20 +19,45 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   final String appBarTitle;
   final IconData? appBarLeading;
   final IconData appBarAction;
+  final Color appBarBackgroundColor;
+  final Color appBarIconColor;
+  final TextStyle? appBarTitleTextStyle;
+  final Function()? leadingOnPressed;
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: customIndigoColor,
+      backgroundColor: appBarBackgroundColor,
       toolbarHeight: 80,
       elevation: 0,
-      title: Text(appBarTitle),
+      title: AutoSizeText(
+        appBarTitle,
+        minFontSize: 19,
+        maxFontSize: 23,
+        maxLines: 1,
+      ),
+      titleTextStyle: appBarTitleTextStyle,
       leadingWidth: 90,
-      leading: IconButton(onPressed: () {}, icon: Icon(appBarLeading)),
-      actions: [Padding(
-        padding: const EdgeInsets.only(right: 10),
-        child: IconButton(onPressed: () {}, icon: Icon(appBarAction,size: 28)),
-      )],
+      leading: IconButton(
+        onPressed: leadingOnPressed,
+        icon: Icon(
+          appBarLeading,
+          color: appBarIconColor,
+        ),
+      ),
+      actions: [
+        Padding(
+          padding: const EdgeInsets.only(right: 10),
+          child: IconButton(
+            onPressed: () {},
+            icon: Icon(
+              appBarAction,
+              size: 28,
+              color: appBarIconColor,
+            ),
+          ),
+        )
+      ],
     );
   }
 }
