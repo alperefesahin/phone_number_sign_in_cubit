@@ -1,10 +1,12 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:phone_number_sign_in/application/auth/phone_number_sign_in/phone_number_sign_in_cubit.dart';
 import 'package:phone_number_sign_in/presentation/common_widgets/colors.dart';
-import 'package:phone_number_sign_in/presentation/pages/sign_in_page/constants/texts.dart';
-import 'package:phone_number_sign_in/presentation/pages/sign_in_page/widgets/phone_number_sign_in_section.dart';
+import 'package:phone_number_sign_in/presentation/pages/sign_in/constants/texts.dart';
+import 'package:phone_number_sign_in/presentation/pages/sign_in/widgets/phone_number_sign_in_section.dart';
+import 'package:phone_number_sign_in/presentation/routes/router.gr.dart';
 
 class BottomSectionOfThePage extends StatelessWidget {
   const BottomSectionOfThePage({Key? key, required this.size}) : super(key: key);
@@ -55,7 +57,13 @@ class BottomSectionOfThePage extends StatelessWidget {
                       ),
                     ),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        if (state.isPhoneNumberInputValidated) {
+                          AutoRouter.of(context).navigate(
+                            SignInValidationRoute(phoneNumber: state.phoneNumber),
+                          );
+                        }
+                      },
                       child: Container(
                         width: 85,
                         height: 85,

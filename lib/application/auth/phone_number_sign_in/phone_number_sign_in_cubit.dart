@@ -12,4 +12,8 @@ class PhoneNumberSignInCubit extends Cubit<PhoneNumberSignInState> {
   void phoneNumberChanged({required String phoneNumber}) {
     emit(state.copyWith(phoneNumber: phoneNumber));
   }
+
+  void updateNextButtonStatus({required bool isPhoneNumberInputValidated}) {
+    emit(state.copyWith(isPhoneNumberInputValidated: isPhoneNumberInputValidated));
+  }
 }

@@ -21,6 +21,7 @@ mixin _$PhoneNumberSignInState {
   Option<AuthFailure> get failureOption => throw _privateConstructorUsedError;
   Option<String> get verificationIdOption => throw _privateConstructorUsedError;
   bool get isInProgress => throw _privateConstructorUsedError;
+  bool get isPhoneNumberInputValidated => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PhoneNumberSignInStateCopyWith<PhoneNumberSignInState> get copyWith =>
@@ -37,7 +38,8 @@ abstract class $PhoneNumberSignInStateCopyWith<$Res> {
       String smsCode,
       Option<AuthFailure> failureOption,
       Option<String> verificationIdOption,
-      bool isInProgress});
+      bool isInProgress,
+      bool isPhoneNumberInputValidated});
 }
 
 /// @nodoc
@@ -56,6 +58,7 @@ class _$PhoneNumberSignInStateCopyWithImpl<$Res>
     Object? failureOption = freezed,
     Object? verificationIdOption = freezed,
     Object? isInProgress = freezed,
+    Object? isPhoneNumberInputValidated = freezed,
   }) {
     return _then(_value.copyWith(
       phoneNumber: phoneNumber == freezed
@@ -78,6 +81,10 @@ class _$PhoneNumberSignInStateCopyWithImpl<$Res>
           ? _value.isInProgress
           : isInProgress // ignore: cast_nullable_to_non_nullable
               as bool,
+      isPhoneNumberInputValidated: isPhoneNumberInputValidated == freezed
+          ? _value.isPhoneNumberInputValidated
+          : isPhoneNumberInputValidated // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -94,7 +101,8 @@ abstract class _$$_PhoneNumberSignInStateCopyWith<$Res>
       String smsCode,
       Option<AuthFailure> failureOption,
       Option<String> verificationIdOption,
-      bool isInProgress});
+      bool isInProgress,
+      bool isPhoneNumberInputValidated});
 }
 
 /// @nodoc
@@ -116,6 +124,7 @@ class __$$_PhoneNumberSignInStateCopyWithImpl<$Res>
     Object? failureOption = freezed,
     Object? verificationIdOption = freezed,
     Object? isInProgress = freezed,
+    Object? isPhoneNumberInputValidated = freezed,
   }) {
     return _then(_$_PhoneNumberSignInState(
       phoneNumber: phoneNumber == freezed
@@ -138,6 +147,10 @@ class __$$_PhoneNumberSignInStateCopyWithImpl<$Res>
           ? _value.isInProgress
           : isInProgress // ignore: cast_nullable_to_non_nullable
               as bool,
+      isPhoneNumberInputValidated: isPhoneNumberInputValidated == freezed
+          ? _value.isPhoneNumberInputValidated
+          : isPhoneNumberInputValidated // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -150,7 +163,8 @@ class _$_PhoneNumberSignInState extends _PhoneNumberSignInState {
       required this.smsCode,
       required this.failureOption,
       required this.verificationIdOption,
-      required this.isInProgress})
+      required this.isInProgress,
+      required this.isPhoneNumberInputValidated})
       : super._();
 
   @override
@@ -163,10 +177,12 @@ class _$_PhoneNumberSignInState extends _PhoneNumberSignInState {
   final Option<String> verificationIdOption;
   @override
   final bool isInProgress;
+  @override
+  final bool isPhoneNumberInputValidated;
 
   @override
   String toString() {
-    return 'PhoneNumberSignInState(phoneNumber: $phoneNumber, smsCode: $smsCode, failureOption: $failureOption, verificationIdOption: $verificationIdOption, isInProgress: $isInProgress)';
+    return 'PhoneNumberSignInState(phoneNumber: $phoneNumber, smsCode: $smsCode, failureOption: $failureOption, verificationIdOption: $verificationIdOption, isInProgress: $isInProgress, isPhoneNumberInputValidated: $isPhoneNumberInputValidated)';
   }
 
   @override
@@ -182,7 +198,10 @@ class _$_PhoneNumberSignInState extends _PhoneNumberSignInState {
             const DeepCollectionEquality()
                 .equals(other.verificationIdOption, verificationIdOption) &&
             const DeepCollectionEquality()
-                .equals(other.isInProgress, isInProgress));
+                .equals(other.isInProgress, isInProgress) &&
+            const DeepCollectionEquality().equals(
+                other.isPhoneNumberInputValidated,
+                isPhoneNumberInputValidated));
   }
 
   @override
@@ -192,7 +211,8 @@ class _$_PhoneNumberSignInState extends _PhoneNumberSignInState {
       const DeepCollectionEquality().hash(smsCode),
       const DeepCollectionEquality().hash(failureOption),
       const DeepCollectionEquality().hash(verificationIdOption),
-      const DeepCollectionEquality().hash(isInProgress));
+      const DeepCollectionEquality().hash(isInProgress),
+      const DeepCollectionEquality().hash(isPhoneNumberInputValidated));
 
   @JsonKey(ignore: true)
   @override
@@ -203,11 +223,13 @@ class _$_PhoneNumberSignInState extends _PhoneNumberSignInState {
 
 abstract class _PhoneNumberSignInState extends PhoneNumberSignInState {
   const factory _PhoneNumberSignInState(
-      {required final String phoneNumber,
-      required final String smsCode,
-      required final Option<AuthFailure> failureOption,
-      required final Option<String> verificationIdOption,
-      required final bool isInProgress}) = _$_PhoneNumberSignInState;
+          {required final String phoneNumber,
+          required final String smsCode,
+          required final Option<AuthFailure> failureOption,
+          required final Option<String> verificationIdOption,
+          required final bool isInProgress,
+          required final bool isPhoneNumberInputValidated}) =
+      _$_PhoneNumberSignInState;
   const _PhoneNumberSignInState._() : super._();
 
   @override
@@ -220,6 +242,8 @@ abstract class _PhoneNumberSignInState extends PhoneNumberSignInState {
   Option<String> get verificationIdOption => throw _privateConstructorUsedError;
   @override
   bool get isInProgress => throw _privateConstructorUsedError;
+  @override
+  bool get isPhoneNumberInputValidated => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_PhoneNumberSignInStateCopyWith<_$_PhoneNumberSignInState> get copyWith =>

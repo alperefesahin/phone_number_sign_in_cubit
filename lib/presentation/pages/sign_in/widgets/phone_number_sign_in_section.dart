@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:phone_number_sign_in/application/auth/phone_number_sign_in/phone_number_sign_in_cubit.dart';
 import 'package:phone_number_sign_in/presentation/common_widgets/colors.dart';
-import 'package:phone_number_sign_in/presentation/pages/sign_in_page/constants/texts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:phone_number_sign_in/presentation/pages/sign_in/constants/texts.dart';
 
 class PhoneNumberSignInSection extends StatefulWidget {
   const PhoneNumberSignInSection({Key? key}) : super(key: key);
@@ -28,6 +28,9 @@ class _PhoneNumberSignInSectionState extends State<PhoneNumberSignInSection> {
       child: InternationalPhoneNumberInput(
         onInputChanged: (PhoneNumber phoneNumber) {
           context.read<PhoneNumberSignInCubit>().phoneNumberChanged(phoneNumber: phoneNumber.phoneNumber!);
+        },
+        onInputValidated: (bool isPhoneNumberInputValidated) {
+          context.read<PhoneNumberSignInCubit>().updateNextButtonStatus(isPhoneNumberInputValidated: isPhoneNumberInputValidated);
         },
         inputDecoration: const InputDecoration(
           hintText: phoneNumberText,

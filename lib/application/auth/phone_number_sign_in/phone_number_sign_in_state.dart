@@ -8,6 +8,7 @@ class PhoneNumberSignInState with _$PhoneNumberSignInState {
     required Option<AuthFailure> failureOption,
     required Option<String> verificationIdOption,
     required bool isInProgress,
+    required bool isPhoneNumberInputValidated,
   }) = _PhoneNumberSignInState;
   const PhoneNumberSignInState._();
 
@@ -17,6 +18,7 @@ class PhoneNumberSignInState with _$PhoneNumberSignInState {
         failureOption: none(),
         verificationIdOption: none(),
         isInProgress: false,
+        isPhoneNumberInputValidated: false
       );
   bool get displayNextButton => verificationIdOption.isNone() && !isInProgress;
   bool get displaySmsCodeForm => verificationIdOption.isSome();
