@@ -65,7 +65,7 @@ class BottomSectionOfThePage extends StatelessWidget {
                       onTap: () {
                         if (state.isPhoneNumberInputValidated) {
                           AutoRouter.of(context).navigate(
-                            const SignInVerificationRoute(),
+                            SignInVerificationRoute(phoneNumber: state.phoneNumber),
                           );
                         }
                       },

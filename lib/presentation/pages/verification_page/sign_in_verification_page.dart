@@ -6,8 +6,9 @@ import 'package:phone_number_sign_in/presentation/pages/verification_page/consta
 import 'package:phone_number_sign_in/presentation/pages/verification_page/widgets/verification_page_body.dart';
 
 class SignInVerificationPage extends StatelessWidget {
-  const SignInVerificationPage({Key? key}) : super(key: key);
+  const SignInVerificationPage({Key? key, required this.phoneNumber}) : super(key: key);
 
+  final String phoneNumber;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +24,7 @@ class SignInVerificationPage extends StatelessWidget {
         appBarTitleTextStyle: const TextStyle(color: blackColor, fontWeight: FontWeight.w500),
         appBarIconColor: blackColor,
       ),
-      body: const VerificationPageBody(),
+      body: VerificationPageBody(phoneNumber: phoneNumber),
     );
   }
 }

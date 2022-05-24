@@ -27,8 +27,11 @@ class AppRouter extends _i3.RootStackRouter {
           routeData: routeData, child: const _i1.SignInPage());
     },
     SignInVerificationRoute.name: (routeData) {
+      final args = routeData.argsAs<SignInVerificationRouteArgs>();
       return _i3.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i2.SignInVerificationPage());
+          routeData: routeData,
+          child: _i2.SignInVerificationPage(
+              key: args.key, phoneNumber: args.phoneNumber));
     }
   };
 
@@ -50,9 +53,26 @@ class SignInRoute extends _i3.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.SignInVerificationPage]
-class SignInVerificationRoute extends _i3.PageRouteInfo<void> {
-  const SignInVerificationRoute()
-      : super(SignInVerificationRoute.name, path: '/sign-in-verification-page');
+class SignInVerificationRoute
+    extends _i3.PageRouteInfo<SignInVerificationRouteArgs> {
+  SignInVerificationRoute({_i4.Key? key, required String phoneNumber})
+      : super(SignInVerificationRoute.name,
+            path: '/sign-in-verification-page',
+            args: SignInVerificationRouteArgs(
+                key: key, phoneNumber: phoneNumber));
 
   static const String name = 'SignInVerificationRoute';
+}
+
+class SignInVerificationRouteArgs {
+  const SignInVerificationRouteArgs({this.key, required this.phoneNumber});
+
+  final _i4.Key? key;
+
+  final String phoneNumber;
+
+  @override
+  String toString() {
+    return 'SignInVerificationRouteArgs{key: $key, phoneNumber: $phoneNumber}';
+  }
 }
