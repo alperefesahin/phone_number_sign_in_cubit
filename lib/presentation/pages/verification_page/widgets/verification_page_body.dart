@@ -1,5 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:phone_number_sign_in/application/auth/phone_number_sign_in/phone_number_sign_in_cubit.dart';
 import 'package:phone_number_sign_in/presentation/common_widgets/colors.dart';
 import 'package:phone_number_sign_in/presentation/pages/verification_page/constants/texts.dart';
 import 'package:phone_number_sign_in/presentation/pages/verification_page/widgets/resend_code_button.dart';
@@ -14,86 +17,107 @@ class VerificationPageBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        const CustomWaveAnimation(),
-        Padding(
-          padding: const EdgeInsets.only(top: 140),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 25),
-                  child: Row(
-                    children: const [
-                      Padding(
-                        padding: EdgeInsets.only(right: 20, top: 5),
-                        child: Icon(
-                          Icons.check_rounded,
-                          size: 25,
-                          color: whiteColor,
-                        ),
-                      ),
-                      AutoSizeText(
-                        confirmationText,
-                        minFontSize: 30,
-                        maxFontSize: 35,
-                        style: TextStyle(
-                          color: whiteColor,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 25,
-                    top: 25,
-                    right: 25,
-                  ),
-                  child: Row(
-                    children: [
-                      const Icon(Icons.vibration, size: 50, color: whiteColor),
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 25),
-                          child: RichText(
-                            text: TextSpan(
-                              children: [
-                                const TextSpan(
-                                  text: confirmationInfoText,
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    color: whiteColor,
-                                    fontWeight: FontWeight.w500,
-                                    height: 1.75,
-                                  ),
-                                ),
-                                TextSpan(
-                                  text: phoneNumber,
-                                  style: const TextStyle(
-                                    fontSize: 18,
-                                    color: whiteColor,
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                ),
-                              ],
+    return BlocConsumer<PhoneNumberSignInCubit, PhoneNumberSignInState>(
+      listenWhen: (p, c) => p.failureOption != c.failureOption,
+      listener: (context, state) {
+        state.failureOption.fold(() {}, (failure) {
+          BotToast.showText(
+            text: failure.when(
+                serverError: () => "Server Error",
+                invalidPhoneNumber: () => "Invalid Phone Number",
+                tooManyRequests: () => "Too Many Requests",
+                deviceNotSupported: () => "Device Not Supported",
+                smsTimeout: () => "Sms Timeout",
+                sessionExpired: () => "Session Expired",
+                invalidVerificationCode: () => "Invalid Verification Code"),
+          );
+
+          context.read<PhoneNumberSignInCubit>().reset();
+        });
+      },
+      builder: (context, state) {
+        return Stack(
+          children: [
+            const CustomWaveAnimation(),
+            Padding(
+              padding: const EdgeInsets.only(top: 140),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 25),
+                      child: Row(
+                        children: const [
+                          Padding(
+                            padding: EdgeInsets.only(right: 20, top: 5),
+                            child: Icon(
+                              Icons.check_rounded,
+                              size: 25,
+                              color: whiteColor,
                             ),
                           ),
-                        ),
-                      )
-                    ],
-                  ),
+                          AutoSizeText(
+                            confirmationText,
+                            minFontSize: 30,
+                            maxFontSize: 35,
+                            style: TextStyle(
+                              color: whiteColor,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        left: 25,
+                        top: 25,
+                        right: 25,
+                      ),
+                      child: Row(
+                        children: [
+                          const Icon(Icons.vibration, size: 50, color: whiteColor),
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 25),
+                              child: RichText(
+                                text: TextSpan(
+                                  children: [
+                                    const TextSpan(
+                                      text: confirmationInfoText,
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        color: whiteColor,
+                                        fontWeight: FontWeight.w500,
+                                        height: 1.75,
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text: phoneNumber,
+                                      style: const TextStyle(
+                                        fontSize: 18,
+                                        color: whiteColor,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    VerificationPinField(state: state),
+                    const ResendCodeButton(),
+                    VerificationConfirmButton(state: state)
+                  ],
                 ),
-                const VerificationPinField(),
-                const ResendCodeButton(),
-                const VerificationConfirmButton()
-              ],
-            ),
-          ),
-        )
-      ],
+              ),
+            )
+          ],
+        );
+      },
     );
   }
 }

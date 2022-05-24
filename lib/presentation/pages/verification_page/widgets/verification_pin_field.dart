@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:phone_number_sign_in/application/auth/phone_number_sign_in/phone_number_sign_in_cubit.dart';
 import 'package:phone_number_sign_in/presentation/common_widgets/colors.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class VerificationPinField extends StatelessWidget {
-  const VerificationPinField({Key? key}) : super(key: key);
+  const VerificationPinField({Key? key, required this.state}) : super(key: key);
 
+  final PhoneNumberSignInState state;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -27,7 +30,9 @@ class VerificationPinField extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             appContext: context,
             length: 4,
-            onChanged: (String value) {},
+            onChanged: (String smsCode) {
+              context.read<PhoneNumberSignInCubit>().smsCodeChanged(smsCode: smsCode);
+            },
             textStyle: const TextStyle(color: whiteColor),
             keyboardType: TextInputType.phone,
             hintCharacter: "-",

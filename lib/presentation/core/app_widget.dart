@@ -1,3 +1,4 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:phone_number_sign_in/application/auth/auth_cubit.dart';
@@ -9,13 +10,22 @@ class AppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AppRouter appRouter = AppRouter();
+    final botToastBuilder = BotToastInit();
+    final BotToastNavigatorObserver botToastNavigatorObserver = BotToastNavigatorObserver();
     return BlocProvider(
       create: (context) => AuthCubit(),
       child: MaterialApp.router(
-        routerDelegate: appRouter.delegate(),
-        routeInformationParser: appRouter.defaultRouteParser(),
         title: 'Phone Number Sign-In',
         debugShowCheckedModeBanner: false,
+        routeInformationParser: appRouter.defaultRouteParser(),
+        routerDelegate: appRouter.delegate(
+          navigatorObservers: () => [
+            botToastNavigatorObserver,
+          ],
+        ),
+        builder: (context, child) {
+          return botToastBuilder(context, child);
+        },
       ),
     );
   }

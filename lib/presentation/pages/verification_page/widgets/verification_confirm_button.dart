@@ -1,15 +1,20 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:phone_number_sign_in/application/auth/phone_number_sign_in/phone_number_sign_in_cubit.dart';
 import 'package:phone_number_sign_in/presentation/common_widgets/colors.dart';
 import 'package:phone_number_sign_in/presentation/pages/verification_page/constants/texts.dart';
 
 class VerificationConfirmButton extends StatelessWidget {
-  const VerificationConfirmButton({Key? key}) : super(key: key);
+  const VerificationConfirmButton({Key? key, required this.state}) : super(key: key);
+  final PhoneNumberSignInState state;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        context.read<PhoneNumberSignInCubit>().signInWithPhoneNumber();
+      },
       splashColor: transparentColor,
       highlightColor: transparentColor,
       child: Container(
