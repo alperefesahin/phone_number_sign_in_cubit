@@ -26,7 +26,6 @@ class VerificationPageBody extends StatelessWidget {
           BotToast.showText(
             text: state.failureMessage!.when(
               serverError: () => "Server Error",
-              invalidPhoneNumber: () => "Invalid Phone Number",
               tooManyRequests: () => "Too Many Requests",
               deviceNotSupported: () => "Device Not Supported",
               smsTimeout: () => "Sms Timeout",

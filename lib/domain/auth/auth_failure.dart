@@ -4,7 +4,6 @@ part 'auth_failure.freezed.dart';
 @freezed
 class AuthFailure with _$AuthFailure {
   const factory AuthFailure.serverError() = _ServerError;
-  const factory AuthFailure.invalidPhoneNumber() = _InvalidPhoneNumber;
   const factory AuthFailure.tooManyRequests() = _TooManyRequests;
   const factory AuthFailure.deviceNotSupported() = _DeviceNotSupported;
   const factory AuthFailure.smsTimeout() = _SmsTimeout;

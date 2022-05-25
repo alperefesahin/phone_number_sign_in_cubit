@@ -19,7 +19,6 @@ mixin _$AuthFailure {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() serverError,
-    required TResult Function() invalidPhoneNumber,
     required TResult Function() tooManyRequests,
     required TResult Function() deviceNotSupported,
     required TResult Function() smsTimeout,
@@ -30,7 +29,6 @@ mixin _$AuthFailure {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? serverError,
-    TResult Function()? invalidPhoneNumber,
     TResult Function()? tooManyRequests,
     TResult Function()? deviceNotSupported,
     TResult Function()? smsTimeout,
@@ -41,7 +39,6 @@ mixin _$AuthFailure {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? serverError,
-    TResult Function()? invalidPhoneNumber,
     TResult Function()? tooManyRequests,
     TResult Function()? deviceNotSupported,
     TResult Function()? smsTimeout,
@@ -53,7 +50,6 @@ mixin _$AuthFailure {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_ServerError value) serverError,
-    required TResult Function(_InvalidPhoneNumber value) invalidPhoneNumber,
     required TResult Function(_TooManyRequests value) tooManyRequests,
     required TResult Function(_DeviceNotSupported value) deviceNotSupported,
     required TResult Function(_SmsTimeout value) smsTimeout,
@@ -65,7 +61,6 @@ mixin _$AuthFailure {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_ServerError value)? serverError,
-    TResult Function(_InvalidPhoneNumber value)? invalidPhoneNumber,
     TResult Function(_TooManyRequests value)? tooManyRequests,
     TResult Function(_DeviceNotSupported value)? deviceNotSupported,
     TResult Function(_SmsTimeout value)? smsTimeout,
@@ -76,7 +71,6 @@ mixin _$AuthFailure {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ServerError value)? serverError,
-    TResult Function(_InvalidPhoneNumber value)? invalidPhoneNumber,
     TResult Function(_TooManyRequests value)? tooManyRequests,
     TResult Function(_DeviceNotSupported value)? deviceNotSupported,
     TResult Function(_SmsTimeout value)? smsTimeout,
@@ -144,7 +138,6 @@ class _$_ServerError implements _ServerError {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() serverError,
-    required TResult Function() invalidPhoneNumber,
     required TResult Function() tooManyRequests,
     required TResult Function() deviceNotSupported,
     required TResult Function() smsTimeout,
@@ -158,7 +151,6 @@ class _$_ServerError implements _ServerError {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? serverError,
-    TResult Function()? invalidPhoneNumber,
     TResult Function()? tooManyRequests,
     TResult Function()? deviceNotSupported,
     TResult Function()? smsTimeout,
@@ -172,7 +164,6 @@ class _$_ServerError implements _ServerError {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? serverError,
-    TResult Function()? invalidPhoneNumber,
     TResult Function()? tooManyRequests,
     TResult Function()? deviceNotSupported,
     TResult Function()? smsTimeout,
@@ -190,7 +181,6 @@ class _$_ServerError implements _ServerError {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_ServerError value) serverError,
-    required TResult Function(_InvalidPhoneNumber value) invalidPhoneNumber,
     required TResult Function(_TooManyRequests value) tooManyRequests,
     required TResult Function(_DeviceNotSupported value) deviceNotSupported,
     required TResult Function(_SmsTimeout value) smsTimeout,
@@ -205,7 +195,6 @@ class _$_ServerError implements _ServerError {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_ServerError value)? serverError,
-    TResult Function(_InvalidPhoneNumber value)? invalidPhoneNumber,
     TResult Function(_TooManyRequests value)? tooManyRequests,
     TResult Function(_DeviceNotSupported value)? deviceNotSupported,
     TResult Function(_SmsTimeout value)? smsTimeout,
@@ -219,7 +208,6 @@ class _$_ServerError implements _ServerError {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ServerError value)? serverError,
-    TResult Function(_InvalidPhoneNumber value)? invalidPhoneNumber,
     TResult Function(_TooManyRequests value)? tooManyRequests,
     TResult Function(_DeviceNotSupported value)? deviceNotSupported,
     TResult Function(_SmsTimeout value)? smsTimeout,
@@ -236,142 +224,6 @@ class _$_ServerError implements _ServerError {
 
 abstract class _ServerError implements AuthFailure {
   const factory _ServerError() = _$_ServerError;
-}
-
-/// @nodoc
-abstract class _$$_InvalidPhoneNumberCopyWith<$Res> {
-  factory _$$_InvalidPhoneNumberCopyWith(_$_InvalidPhoneNumber value,
-          $Res Function(_$_InvalidPhoneNumber) then) =
-      __$$_InvalidPhoneNumberCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$_InvalidPhoneNumberCopyWithImpl<$Res>
-    extends _$AuthFailureCopyWithImpl<$Res>
-    implements _$$_InvalidPhoneNumberCopyWith<$Res> {
-  __$$_InvalidPhoneNumberCopyWithImpl(
-      _$_InvalidPhoneNumber _value, $Res Function(_$_InvalidPhoneNumber) _then)
-      : super(_value, (v) => _then(v as _$_InvalidPhoneNumber));
-
-  @override
-  _$_InvalidPhoneNumber get _value => super._value as _$_InvalidPhoneNumber;
-}
-
-/// @nodoc
-
-class _$_InvalidPhoneNumber implements _InvalidPhoneNumber {
-  const _$_InvalidPhoneNumber();
-
-  @override
-  String toString() {
-    return 'AuthFailure.invalidPhoneNumber()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_InvalidPhoneNumber);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() serverError,
-    required TResult Function() invalidPhoneNumber,
-    required TResult Function() tooManyRequests,
-    required TResult Function() deviceNotSupported,
-    required TResult Function() smsTimeout,
-    required TResult Function() sessionExpired,
-    required TResult Function() invalidVerificationCode,
-  }) {
-    return invalidPhoneNumber();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? serverError,
-    TResult Function()? invalidPhoneNumber,
-    TResult Function()? tooManyRequests,
-    TResult Function()? deviceNotSupported,
-    TResult Function()? smsTimeout,
-    TResult Function()? sessionExpired,
-    TResult Function()? invalidVerificationCode,
-  }) {
-    return invalidPhoneNumber?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? serverError,
-    TResult Function()? invalidPhoneNumber,
-    TResult Function()? tooManyRequests,
-    TResult Function()? deviceNotSupported,
-    TResult Function()? smsTimeout,
-    TResult Function()? sessionExpired,
-    TResult Function()? invalidVerificationCode,
-    required TResult orElse(),
-  }) {
-    if (invalidPhoneNumber != null) {
-      return invalidPhoneNumber();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_ServerError value) serverError,
-    required TResult Function(_InvalidPhoneNumber value) invalidPhoneNumber,
-    required TResult Function(_TooManyRequests value) tooManyRequests,
-    required TResult Function(_DeviceNotSupported value) deviceNotSupported,
-    required TResult Function(_SmsTimeout value) smsTimeout,
-    required TResult Function(_SessionExpired value) sessionExpired,
-    required TResult Function(_InvalidVerificationCode value)
-        invalidVerificationCode,
-  }) {
-    return invalidPhoneNumber(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_ServerError value)? serverError,
-    TResult Function(_InvalidPhoneNumber value)? invalidPhoneNumber,
-    TResult Function(_TooManyRequests value)? tooManyRequests,
-    TResult Function(_DeviceNotSupported value)? deviceNotSupported,
-    TResult Function(_SmsTimeout value)? smsTimeout,
-    TResult Function(_SessionExpired value)? sessionExpired,
-    TResult Function(_InvalidVerificationCode value)? invalidVerificationCode,
-  }) {
-    return invalidPhoneNumber?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_ServerError value)? serverError,
-    TResult Function(_InvalidPhoneNumber value)? invalidPhoneNumber,
-    TResult Function(_TooManyRequests value)? tooManyRequests,
-    TResult Function(_DeviceNotSupported value)? deviceNotSupported,
-    TResult Function(_SmsTimeout value)? smsTimeout,
-    TResult Function(_SessionExpired value)? sessionExpired,
-    TResult Function(_InvalidVerificationCode value)? invalidVerificationCode,
-    required TResult orElse(),
-  }) {
-    if (invalidPhoneNumber != null) {
-      return invalidPhoneNumber(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _InvalidPhoneNumber implements AuthFailure {
-  const factory _InvalidPhoneNumber() = _$_InvalidPhoneNumber;
 }
 
 /// @nodoc
@@ -416,7 +268,6 @@ class _$_TooManyRequests implements _TooManyRequests {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() serverError,
-    required TResult Function() invalidPhoneNumber,
     required TResult Function() tooManyRequests,
     required TResult Function() deviceNotSupported,
     required TResult Function() smsTimeout,
@@ -430,7 +281,6 @@ class _$_TooManyRequests implements _TooManyRequests {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? serverError,
-    TResult Function()? invalidPhoneNumber,
     TResult Function()? tooManyRequests,
     TResult Function()? deviceNotSupported,
     TResult Function()? smsTimeout,
@@ -444,7 +294,6 @@ class _$_TooManyRequests implements _TooManyRequests {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? serverError,
-    TResult Function()? invalidPhoneNumber,
     TResult Function()? tooManyRequests,
     TResult Function()? deviceNotSupported,
     TResult Function()? smsTimeout,
@@ -462,7 +311,6 @@ class _$_TooManyRequests implements _TooManyRequests {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_ServerError value) serverError,
-    required TResult Function(_InvalidPhoneNumber value) invalidPhoneNumber,
     required TResult Function(_TooManyRequests value) tooManyRequests,
     required TResult Function(_DeviceNotSupported value) deviceNotSupported,
     required TResult Function(_SmsTimeout value) smsTimeout,
@@ -477,7 +325,6 @@ class _$_TooManyRequests implements _TooManyRequests {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_ServerError value)? serverError,
-    TResult Function(_InvalidPhoneNumber value)? invalidPhoneNumber,
     TResult Function(_TooManyRequests value)? tooManyRequests,
     TResult Function(_DeviceNotSupported value)? deviceNotSupported,
     TResult Function(_SmsTimeout value)? smsTimeout,
@@ -491,7 +338,6 @@ class _$_TooManyRequests implements _TooManyRequests {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ServerError value)? serverError,
-    TResult Function(_InvalidPhoneNumber value)? invalidPhoneNumber,
     TResult Function(_TooManyRequests value)? tooManyRequests,
     TResult Function(_DeviceNotSupported value)? deviceNotSupported,
     TResult Function(_SmsTimeout value)? smsTimeout,
@@ -552,7 +398,6 @@ class _$_DeviceNotSupported implements _DeviceNotSupported {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() serverError,
-    required TResult Function() invalidPhoneNumber,
     required TResult Function() tooManyRequests,
     required TResult Function() deviceNotSupported,
     required TResult Function() smsTimeout,
@@ -566,7 +411,6 @@ class _$_DeviceNotSupported implements _DeviceNotSupported {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? serverError,
-    TResult Function()? invalidPhoneNumber,
     TResult Function()? tooManyRequests,
     TResult Function()? deviceNotSupported,
     TResult Function()? smsTimeout,
@@ -580,7 +424,6 @@ class _$_DeviceNotSupported implements _DeviceNotSupported {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? serverError,
-    TResult Function()? invalidPhoneNumber,
     TResult Function()? tooManyRequests,
     TResult Function()? deviceNotSupported,
     TResult Function()? smsTimeout,
@@ -598,7 +441,6 @@ class _$_DeviceNotSupported implements _DeviceNotSupported {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_ServerError value) serverError,
-    required TResult Function(_InvalidPhoneNumber value) invalidPhoneNumber,
     required TResult Function(_TooManyRequests value) tooManyRequests,
     required TResult Function(_DeviceNotSupported value) deviceNotSupported,
     required TResult Function(_SmsTimeout value) smsTimeout,
@@ -613,7 +455,6 @@ class _$_DeviceNotSupported implements _DeviceNotSupported {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_ServerError value)? serverError,
-    TResult Function(_InvalidPhoneNumber value)? invalidPhoneNumber,
     TResult Function(_TooManyRequests value)? tooManyRequests,
     TResult Function(_DeviceNotSupported value)? deviceNotSupported,
     TResult Function(_SmsTimeout value)? smsTimeout,
@@ -627,7 +468,6 @@ class _$_DeviceNotSupported implements _DeviceNotSupported {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ServerError value)? serverError,
-    TResult Function(_InvalidPhoneNumber value)? invalidPhoneNumber,
     TResult Function(_TooManyRequests value)? tooManyRequests,
     TResult Function(_DeviceNotSupported value)? deviceNotSupported,
     TResult Function(_SmsTimeout value)? smsTimeout,
@@ -687,7 +527,6 @@ class _$_SmsTimeout implements _SmsTimeout {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() serverError,
-    required TResult Function() invalidPhoneNumber,
     required TResult Function() tooManyRequests,
     required TResult Function() deviceNotSupported,
     required TResult Function() smsTimeout,
@@ -701,7 +540,6 @@ class _$_SmsTimeout implements _SmsTimeout {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? serverError,
-    TResult Function()? invalidPhoneNumber,
     TResult Function()? tooManyRequests,
     TResult Function()? deviceNotSupported,
     TResult Function()? smsTimeout,
@@ -715,7 +553,6 @@ class _$_SmsTimeout implements _SmsTimeout {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? serverError,
-    TResult Function()? invalidPhoneNumber,
     TResult Function()? tooManyRequests,
     TResult Function()? deviceNotSupported,
     TResult Function()? smsTimeout,
@@ -733,7 +570,6 @@ class _$_SmsTimeout implements _SmsTimeout {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_ServerError value) serverError,
-    required TResult Function(_InvalidPhoneNumber value) invalidPhoneNumber,
     required TResult Function(_TooManyRequests value) tooManyRequests,
     required TResult Function(_DeviceNotSupported value) deviceNotSupported,
     required TResult Function(_SmsTimeout value) smsTimeout,
@@ -748,7 +584,6 @@ class _$_SmsTimeout implements _SmsTimeout {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_ServerError value)? serverError,
-    TResult Function(_InvalidPhoneNumber value)? invalidPhoneNumber,
     TResult Function(_TooManyRequests value)? tooManyRequests,
     TResult Function(_DeviceNotSupported value)? deviceNotSupported,
     TResult Function(_SmsTimeout value)? smsTimeout,
@@ -762,7 +597,6 @@ class _$_SmsTimeout implements _SmsTimeout {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ServerError value)? serverError,
-    TResult Function(_InvalidPhoneNumber value)? invalidPhoneNumber,
     TResult Function(_TooManyRequests value)? tooManyRequests,
     TResult Function(_DeviceNotSupported value)? deviceNotSupported,
     TResult Function(_SmsTimeout value)? smsTimeout,
@@ -823,7 +657,6 @@ class _$_SessionExpired implements _SessionExpired {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() serverError,
-    required TResult Function() invalidPhoneNumber,
     required TResult Function() tooManyRequests,
     required TResult Function() deviceNotSupported,
     required TResult Function() smsTimeout,
@@ -837,7 +670,6 @@ class _$_SessionExpired implements _SessionExpired {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? serverError,
-    TResult Function()? invalidPhoneNumber,
     TResult Function()? tooManyRequests,
     TResult Function()? deviceNotSupported,
     TResult Function()? smsTimeout,
@@ -851,7 +683,6 @@ class _$_SessionExpired implements _SessionExpired {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? serverError,
-    TResult Function()? invalidPhoneNumber,
     TResult Function()? tooManyRequests,
     TResult Function()? deviceNotSupported,
     TResult Function()? smsTimeout,
@@ -869,7 +700,6 @@ class _$_SessionExpired implements _SessionExpired {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_ServerError value) serverError,
-    required TResult Function(_InvalidPhoneNumber value) invalidPhoneNumber,
     required TResult Function(_TooManyRequests value) tooManyRequests,
     required TResult Function(_DeviceNotSupported value) deviceNotSupported,
     required TResult Function(_SmsTimeout value) smsTimeout,
@@ -884,7 +714,6 @@ class _$_SessionExpired implements _SessionExpired {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_ServerError value)? serverError,
-    TResult Function(_InvalidPhoneNumber value)? invalidPhoneNumber,
     TResult Function(_TooManyRequests value)? tooManyRequests,
     TResult Function(_DeviceNotSupported value)? deviceNotSupported,
     TResult Function(_SmsTimeout value)? smsTimeout,
@@ -898,7 +727,6 @@ class _$_SessionExpired implements _SessionExpired {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ServerError value)? serverError,
-    TResult Function(_InvalidPhoneNumber value)? invalidPhoneNumber,
     TResult Function(_TooManyRequests value)? tooManyRequests,
     TResult Function(_DeviceNotSupported value)? deviceNotSupported,
     TResult Function(_SmsTimeout value)? smsTimeout,
@@ -961,7 +789,6 @@ class _$_InvalidVerificationCode implements _InvalidVerificationCode {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() serverError,
-    required TResult Function() invalidPhoneNumber,
     required TResult Function() tooManyRequests,
     required TResult Function() deviceNotSupported,
     required TResult Function() smsTimeout,
@@ -975,7 +802,6 @@ class _$_InvalidVerificationCode implements _InvalidVerificationCode {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? serverError,
-    TResult Function()? invalidPhoneNumber,
     TResult Function()? tooManyRequests,
     TResult Function()? deviceNotSupported,
     TResult Function()? smsTimeout,
@@ -989,7 +815,6 @@ class _$_InvalidVerificationCode implements _InvalidVerificationCode {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? serverError,
-    TResult Function()? invalidPhoneNumber,
     TResult Function()? tooManyRequests,
     TResult Function()? deviceNotSupported,
     TResult Function()? smsTimeout,
@@ -1007,7 +832,6 @@ class _$_InvalidVerificationCode implements _InvalidVerificationCode {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_ServerError value) serverError,
-    required TResult Function(_InvalidPhoneNumber value) invalidPhoneNumber,
     required TResult Function(_TooManyRequests value) tooManyRequests,
     required TResult Function(_DeviceNotSupported value) deviceNotSupported,
     required TResult Function(_SmsTimeout value) smsTimeout,
@@ -1022,7 +846,6 @@ class _$_InvalidVerificationCode implements _InvalidVerificationCode {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_ServerError value)? serverError,
-    TResult Function(_InvalidPhoneNumber value)? invalidPhoneNumber,
     TResult Function(_TooManyRequests value)? tooManyRequests,
     TResult Function(_DeviceNotSupported value)? deviceNotSupported,
     TResult Function(_SmsTimeout value)? smsTimeout,
@@ -1036,7 +859,6 @@ class _$_InvalidVerificationCode implements _InvalidVerificationCode {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ServerError value)? serverError,
-    TResult Function(_InvalidPhoneNumber value)? invalidPhoneNumber,
     TResult Function(_TooManyRequests value)? tooManyRequests,
     TResult Function(_DeviceNotSupported value)? deviceNotSupported,
     TResult Function(_SmsTimeout value)? smsTimeout,
