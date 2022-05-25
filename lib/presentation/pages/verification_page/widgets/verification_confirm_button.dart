@@ -6,14 +6,19 @@ import 'package:phone_number_sign_in/presentation/common_widgets/colors.dart';
 import 'package:phone_number_sign_in/presentation/pages/verification_page/constants/texts.dart';
 
 class VerificationConfirmButton extends StatelessWidget {
-  const VerificationConfirmButton({Key? key, required this.state}) : super(key: key);
+  const VerificationConfirmButton({
+    Key? key,
+    required this.state,
+    required this.phoneNumber,
+  }) : super(key: key);
   final PhoneNumberSignInState state;
+  final String phoneNumber;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        context.read<PhoneNumberSignInCubit>().signInWithPhoneNumber();
+        context.read<PhoneNumberSignInCubit>().verifySmsCode();
       },
       splashColor: transparentColor,
       highlightColor: transparentColor,

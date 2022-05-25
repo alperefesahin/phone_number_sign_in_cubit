@@ -5,22 +5,18 @@ class PhoneNumberSignInState with _$PhoneNumberSignInState {
   const factory PhoneNumberSignInState({
     required String phoneNumber,
     required String smsCode,
-    required Option<AuthFailure> failureOption,
-    required Option<String> verificationIdOption,
+    required String verificationId,
     required bool isInProgress,
     required bool isPhoneNumberInputValidated,
+    AuthFailure? failureMessage,
   }) = _PhoneNumberSignInState;
   const PhoneNumberSignInState._();
 
-  factory PhoneNumberSignInState.initial() => PhoneNumberSignInState(
+  factory PhoneNumberSignInState.initial() => const PhoneNumberSignInState(
         phoneNumber: "",
         smsCode: "",
-        failureOption: none(),
-        verificationIdOption: none(),
+        verificationId: "",
         isInProgress: false,
-        isPhoneNumberInputValidated: false
+        isPhoneNumberInputValidated: false,
       );
-  bool get displayNextButton => verificationIdOption.isNone() && !isInProgress;
-  bool get displaySmsCodeForm => verificationIdOption.isSome();
-  bool get displayLoadingIndicator => !displayNextButton && !displaySmsCodeForm;
 }

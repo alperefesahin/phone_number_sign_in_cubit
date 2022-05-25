@@ -9,9 +9,10 @@ import 'package:phone_number_sign_in/presentation/pages/sign_in/widgets/phone_nu
 import 'package:phone_number_sign_in/presentation/routes/router.gr.dart';
 
 class BottomSectionOfThePage extends StatelessWidget {
-  const BottomSectionOfThePage({Key? key, required this.size}) : super(key: key);
+  const BottomSectionOfThePage({Key? key, required this.size, required this.state}) : super(key: key);
 
   final Size size;
+  final PhoneNumberSignInState state;
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +65,7 @@ class BottomSectionOfThePage extends StatelessWidget {
                     InkWell(
                       onTap: () {
                         if (state.isPhoneNumberInputValidated) {
+                          context.read<PhoneNumberSignInCubit>().signInWithPhoneNumber(phoneNumber: state.phoneNumber);
                           AutoRouter.of(context).navigate(
                             SignInVerificationRoute(phoneNumber: state.phoneNumber),
                           );

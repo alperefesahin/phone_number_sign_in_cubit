@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
@@ -18,22 +19,24 @@ class VerificationPageBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<PhoneNumberSignInCubit, PhoneNumberSignInState>(
-      listenWhen: (p, c) => p.failureOption != c.failureOption,
+      listenWhen: (p, c) => p.failureMessage != c.failureMessage,
       listener: (context, state) {
-        state.failureOption.fold(() {}, (failure) {
+        if (state.failureMessage == null) {
+        } else if (state.failureMessage != null) {
           BotToast.showText(
-            text: failure.when(
-                serverError: () => "Server Error",
-                invalidPhoneNumber: () => "Invalid Phone Number",
-                tooManyRequests: () => "Too Many Requests",
-                deviceNotSupported: () => "Device Not Supported",
-                smsTimeout: () => "Sms Timeout",
-                sessionExpired: () => "Session Expired",
-                invalidVerificationCode: () => "Invalid Verification Code"),
+            text: state.failureMessage!.when(
+              serverError: () => "Server Error",
+              invalidPhoneNumber: () => "Invalid Phone Number",
+              tooManyRequests: () => "Too Many Requests",
+              deviceNotSupported: () => "Device Not Supported",
+              smsTimeout: () => "Sms Timeout",
+              sessionExpired: () => "Session Expired",
+              invalidVerificationCode: () => "Invalid Verification Code",
+            ),
           );
-
           context.read<PhoneNumberSignInCubit>().reset();
-        });
+          AutoRouter.of(context).popUntilRoot();
+        }
       },
       builder: (context, state) {
         return Stack(
@@ -110,7 +113,10 @@ class VerificationPageBody extends StatelessWidget {
                     ),
                     VerificationPinField(state: state),
                     const ResendCodeButton(),
-                    VerificationConfirmButton(state: state)
+                    VerificationConfirmButton(
+                      state: state,
+                      phoneNumber: phoneNumber,
+                    )
                   ],
                 ),
               ),

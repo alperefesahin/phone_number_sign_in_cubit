@@ -9,6 +9,5 @@ class AuthFailure with _$AuthFailure {
   const factory AuthFailure.deviceNotSupported() = _DeviceNotSupported;
   const factory AuthFailure.smsTimeout() = _SmsTimeout;
   const factory AuthFailure.sessionExpired() = _SessionExpired;
-  const factory AuthFailure.invalidVerificationCode() =
-      _InvalidVerificationCode;
+  const factory AuthFailure.invalidVerificationCode() = _InvalidVerificationCode;
 }

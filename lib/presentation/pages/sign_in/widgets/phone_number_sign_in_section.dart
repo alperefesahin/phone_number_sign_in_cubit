@@ -40,6 +40,8 @@ class _PhoneNumberSignInSectionState extends State<PhoneNumberSignInSection> {
         autoValidateMode: AutovalidateMode.onUserInteraction,
         initialValue: initialPhone,
         formatInput: false,
+      autoFocus: false,
+      autoFocusSearch: false,
         inputBorder: const OutlineInputBorder(),
       ),
     );

@@ -34,11 +34,11 @@ dependencies:
   auto_route: ^4.0.1
   wave: ^0.2.0
   pin_code_fields: ^7.4.0
-  cupertino_icons: ^1.0.2
   bot_toast: ^4.0.2
-  
+  progress_indicators: ^1.0.0
+  cupertino_icons: ^1.0.2
+
   flutter_bloc: ^8.0.1
-  dartz: ^0.10.1
   freezed_annotation: ^2.0.3
 
   firebase_core: ^1.17.0
