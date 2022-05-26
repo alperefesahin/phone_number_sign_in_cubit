@@ -11,6 +11,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
     this.appBarLeading,
     this.appBarTitleTextStyle,
     this.leadingOnPressed,
+    this.actionsOnPressed,
   })  : preferredSize = const Size.fromHeight(70.0),
         super(key: key);
 
@@ -23,6 +24,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   final Color appBarIconColor;
   final TextStyle? appBarTitleTextStyle;
   final Function()? leadingOnPressed;
+  final Function()? actionsOnPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +51,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
         Padding(
           padding: const EdgeInsets.only(right: 10),
           child: IconButton(
-            onPressed: () {},
+            onPressed: actionsOnPressed,
             icon: Icon(
               appBarAction,
               size: 28,

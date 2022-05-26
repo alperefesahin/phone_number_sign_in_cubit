@@ -22,12 +22,21 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   Future<void> _listenAuthStateChangesStream(User? authUser) async {
-    emit(
-      state.copyWith(
-        userModel: AuthUserModel(id: authUser!.uid, phoneNumber: authUser.phoneNumber!),
-        isUserCheckedFromAuthService: true,
-      ),
-    );
+    if (authUser == null) {
+      emit(
+        state.copyWith(
+          userModel: AuthUserModel.empty(),
+          isUserLoggedIn: false,
+        ),
+      );
+    } else {
+      emit(
+        state.copyWith(
+          userModel: AuthUserModel(id: authUser.uid, phoneNumber: authUser.phoneNumber!),
+          isUserLoggedIn: true,
+        ),
+      );
+    }
   }
 
   Future<void> signOut() async {

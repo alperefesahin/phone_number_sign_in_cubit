@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$AuthState {
   AuthUserModel get userModel => throw _privateConstructorUsedError;
-  bool get isUserCheckedFromAuthService => throw _privateConstructorUsedError;
+  bool get isUserLoggedIn => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AuthStateCopyWith<AuthState> get copyWith =>
@@ -28,7 +28,7 @@ mixin _$AuthState {
 abstract class $AuthStateCopyWith<$Res> {
   factory $AuthStateCopyWith(AuthState value, $Res Function(AuthState) then) =
       _$AuthStateCopyWithImpl<$Res>;
-  $Res call({AuthUserModel userModel, bool isUserCheckedFromAuthService});
+  $Res call({AuthUserModel userModel, bool isUserLoggedIn});
 
   $AuthUserModelCopyWith<$Res> get userModel;
 }
@@ -44,16 +44,16 @@ class _$AuthStateCopyWithImpl<$Res> implements $AuthStateCopyWith<$Res> {
   @override
   $Res call({
     Object? userModel = freezed,
-    Object? isUserCheckedFromAuthService = freezed,
+    Object? isUserLoggedIn = freezed,
   }) {
     return _then(_value.copyWith(
       userModel: userModel == freezed
           ? _value.userModel
           : userModel // ignore: cast_nullable_to_non_nullable
               as AuthUserModel,
-      isUserCheckedFromAuthService: isUserCheckedFromAuthService == freezed
-          ? _value.isUserCheckedFromAuthService
-          : isUserCheckedFromAuthService // ignore: cast_nullable_to_non_nullable
+      isUserLoggedIn: isUserLoggedIn == freezed
+          ? _value.isUserLoggedIn
+          : isUserLoggedIn // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -72,7 +72,7 @@ abstract class _$$_AuthStateCopyWith<$Res> implements $AuthStateCopyWith<$Res> {
           _$_AuthState value, $Res Function(_$_AuthState) then) =
       __$$_AuthStateCopyWithImpl<$Res>;
   @override
-  $Res call({AuthUserModel userModel, bool isUserCheckedFromAuthService});
+  $Res call({AuthUserModel userModel, bool isUserLoggedIn});
 
   @override
   $AuthUserModelCopyWith<$Res> get userModel;
@@ -91,16 +91,16 @@ class __$$_AuthStateCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? userModel = freezed,
-    Object? isUserCheckedFromAuthService = freezed,
+    Object? isUserLoggedIn = freezed,
   }) {
     return _then(_$_AuthState(
       userModel: userModel == freezed
           ? _value.userModel
           : userModel // ignore: cast_nullable_to_non_nullable
               as AuthUserModel,
-      isUserCheckedFromAuthService: isUserCheckedFromAuthService == freezed
-          ? _value.isUserCheckedFromAuthService
-          : isUserCheckedFromAuthService // ignore: cast_nullable_to_non_nullable
+      isUserLoggedIn: isUserLoggedIn == freezed
+          ? _value.isUserLoggedIn
+          : isUserLoggedIn // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -109,18 +109,17 @@ class __$$_AuthStateCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_AuthState extends _AuthState {
-  const _$_AuthState(
-      {required this.userModel, required this.isUserCheckedFromAuthService})
+  const _$_AuthState({required this.userModel, required this.isUserLoggedIn})
       : super._();
 
   @override
   final AuthUserModel userModel;
   @override
-  final bool isUserCheckedFromAuthService;
+  final bool isUserLoggedIn;
 
   @override
   String toString() {
-    return 'AuthState(userModel: $userModel, isUserCheckedFromAuthService: $isUserCheckedFromAuthService)';
+    return 'AuthState(userModel: $userModel, isUserLoggedIn: $isUserLoggedIn)';
   }
 
   @override
@@ -129,16 +128,15 @@ class _$_AuthState extends _AuthState {
         (other.runtimeType == runtimeType &&
             other is _$_AuthState &&
             const DeepCollectionEquality().equals(other.userModel, userModel) &&
-            const DeepCollectionEquality().equals(
-                other.isUserCheckedFromAuthService,
-                isUserCheckedFromAuthService));
+            const DeepCollectionEquality()
+                .equals(other.isUserLoggedIn, isUserLoggedIn));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(userModel),
-      const DeepCollectionEquality().hash(isUserCheckedFromAuthService));
+      const DeepCollectionEquality().hash(isUserLoggedIn));
 
   @JsonKey(ignore: true)
   @override
@@ -149,13 +147,13 @@ class _$_AuthState extends _AuthState {
 abstract class _AuthState extends AuthState {
   const factory _AuthState(
       {required final AuthUserModel userModel,
-      required final bool isUserCheckedFromAuthService}) = _$_AuthState;
+      required final bool isUserLoggedIn}) = _$_AuthState;
   const _AuthState._() : super._();
 
   @override
   AuthUserModel get userModel => throw _privateConstructorUsedError;
   @override
-  bool get isUserCheckedFromAuthService => throw _privateConstructorUsedError;
+  bool get isUserLoggedIn => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_AuthStateCopyWith<_$_AuthState> get copyWith =>
