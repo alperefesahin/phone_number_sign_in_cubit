@@ -42,22 +42,40 @@ class PhoneNumberSignInCubit extends Cubit<PhoneNumberSignInState> {
         failureMessage: null,
         verificationId: "",
         isInProgress: false,
+        isPhoneNumberInputValidated: false,
       ),
     );
   }
 
   Future verifySmsCode() async {
     try {
+      emit(state.copyWith(isInProgress: true));
       final PhoneAuthCredential credential = PhoneAuthProvider.credential(
         verificationId: state.verificationId,
         smsCode: state.smsCode,
       );
-      await _authService.signInWithCredential(credential);
+      await _authService.signInWithCredential(credential).then(
+            (value) => emit(
+              state.copyWith(
+                isInProgress: false,
+              ),
+            ),
+          );
     } on FirebaseAuthException catch (e) {
       if (e.code == "session-expired") {
-        emit(state.copyWith(failureMessage: const AuthFailure.sessionExpired()));
+        emit(
+          state.copyWith(
+            failureMessage: const AuthFailure.sessionExpired(),
+            isInProgress: false,
+          ),
+        );
       } else if (e.code == "ınvalıd-verıfıcatıon-code" || e.code == "invalid-verification-code") {
-        emit(state.copyWith(failureMessage: const AuthFailure.invalidVerificationCode()));
+        emit(
+          state.copyWith(
+            failureMessage: const AuthFailure.invalidVerificationCode(),
+            isInProgress: false,
+          ),
+        );
       }
     }
   }
@@ -71,7 +89,10 @@ class PhoneNumberSignInCubit extends Cubit<PhoneNumberSignInState> {
         await _authService.signInWithCredential(credential);
       },
       codeSent: (String verificationId, int? resendToken) async {
-        emit(state.copyWith(verificationId: verificationId));
+        emit(state.copyWith(
+          verificationId: verificationId,
+          isInProgress: false,
+        ));
       },
       verificationFailed: (FirebaseAuthException e) {
         late final AuthFailure result;
@@ -86,7 +107,10 @@ class PhoneNumberSignInCubit extends Cubit<PhoneNumberSignInState> {
         emit(state.copyWith(failureMessage: result, isInProgress: false));
       },
       codeAutoRetrievalTimeout: (String verificationId) {
-        emit(state.copyWith(failureMessage: const AuthFailure.smsTimeout(), isInProgress: false));
+        emit(state.copyWith(
+          failureMessage: const AuthFailure.smsTimeout(),
+          isInProgress: false,
+        ));
       },
     );
   }
