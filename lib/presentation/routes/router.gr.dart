@@ -13,6 +13,8 @@
 import 'package:auto_route/auto_route.dart' as _i5;
 import 'package:flutter/material.dart' as _i6;
 
+import '../../application/auth/phone_number_sign_in/phone_number_sign_in_cubit.dart'
+    as _i7;
 import '../pages/home/home_page.dart' as _i3;
 import '../pages/landing/landing_page.dart' as _i4;
 import '../pages/sign_in/sign_in_page.dart' as _i1;
@@ -32,8 +34,7 @@ class AppRouter extends _i5.RootStackRouter {
       final args = routeData.argsAs<SignInVerificationRouteArgs>();
       return _i5.MaterialPageX<dynamic>(
           routeData: routeData,
-          child: _i2.SignInVerificationPage(
-              key: args.key, phoneNumber: args.phoneNumber));
+          child: _i2.SignInVerificationPage(key: args.key, state: args.state));
     },
     HomeRoute.name: (routeData) {
       return _i5.MaterialPageX<dynamic>(
@@ -67,25 +68,25 @@ class SignInRoute extends _i5.PageRouteInfo<void> {
 /// [_i2.SignInVerificationPage]
 class SignInVerificationRoute
     extends _i5.PageRouteInfo<SignInVerificationRouteArgs> {
-  SignInVerificationRoute({_i6.Key? key, required String phoneNumber})
+  SignInVerificationRoute(
+      {_i6.Key? key, required _i7.PhoneNumberSignInState state})
       : super(SignInVerificationRoute.name,
             path: '/sign-in-verification-page',
-            args: SignInVerificationRouteArgs(
-                key: key, phoneNumber: phoneNumber));
+            args: SignInVerificationRouteArgs(key: key, state: state));
 
   static const String name = 'SignInVerificationRoute';
 }
 
 class SignInVerificationRouteArgs {
-  const SignInVerificationRouteArgs({this.key, required this.phoneNumber});
+  const SignInVerificationRouteArgs({this.key, required this.state});
 
   final _i6.Key? key;
 
-  final String phoneNumber;
+  final _i7.PhoneNumberSignInState state;
 
   @override
   String toString() {
-    return 'SignInVerificationRouteArgs{key: $key, phoneNumber: $phoneNumber}';
+    return 'SignInVerificationRouteArgs{key: $key, state: $state}';
   }
 }
 
