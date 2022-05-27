@@ -19,25 +19,7 @@ class VerificationPageBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<PhoneNumberSignInCubit, PhoneNumberSignInState>(
-      listenWhen: (p, c) => p.failureMessage != c.failureMessage,
-      listener: (context, state) {
-        if (state.failureMessage == null) {
-        } else if (state.failureMessage != null) {
-          BotToast.showText(
-            text: state.failureMessage!.when(
-              serverError: () => "Server Error",
-              tooManyRequests: () => "Too Many Requests",
-              deviceNotSupported: () => "Device Not Supported",
-              smsTimeout: () => "Sms Timeout",
-              sessionExpired: () => "Session Expired",
-              invalidVerificationCode: () => "Invalid Verification Code",
-            ),
-          );
-          context.read<PhoneNumberSignInCubit>().reset();
-          AutoRouter.of(context).popUntilRoot();
-        }
-      },
+    return BlocBuilder<PhoneNumberSignInCubit, PhoneNumberSignInState>(
       builder: (context, state) {
         return Stack(
           children: [

@@ -1,3 +1,5 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,9 +19,28 @@ class SignInPage extends StatelessWidget {
     return BlocBuilder<PhoneNumberSignInCubit, PhoneNumberSignInState>(
       builder: (context, state) {
         return state.isInProgress
-            ? const Scaffold(
-                body: CustomProgressIndicator(
-                  progressIndicatorColor: blackColor,
+            ? BlocListener<PhoneNumberSignInCubit, PhoneNumberSignInState>(
+                listenWhen: (p, c) => p.failureMessage != c.failureMessage,
+                listener: (context, state) {
+                  if (state.failureMessage == null) {
+                  } else if (state.failureMessage != null) {
+                    BotToast.showText(
+                      text: state.failureMessage!.when(
+                        serverError: () => "Server Error",
+                        tooManyRequests: () => "Too Many Requests",
+                        deviceNotSupported: () => "Device Not Supported",
+                        smsTimeout: () => "Sms Timeout",
+                        sessionExpired: () => "Session Expired",
+                        invalidVerificationCode: () => "Invalid Verification Code",
+                      ),
+                    );
+                    context.read<PhoneNumberSignInCubit>().reset();
+                  }
+                },
+                child: const Scaffold(
+                  body: CustomProgressIndicator(
+                    progressIndicatorColor: blackColor,
+                  ),
                 ),
               )
             : Scaffold(
