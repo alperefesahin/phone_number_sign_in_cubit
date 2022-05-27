@@ -30,7 +30,9 @@ class _PhoneNumberSignInSectionState extends State<PhoneNumberSignInSection> {
           context.read<PhoneNumberSignInCubit>().phoneNumberChanged(phoneNumber: phoneNumber.phoneNumber!);
         },
         onInputValidated: (bool isPhoneNumberInputValidated) {
-          context.read<PhoneNumberSignInCubit>().updateNextButtonStatus(isPhoneNumberInputValidated: isPhoneNumberInputValidated);
+          context
+              .read<PhoneNumberSignInCubit>()
+              .updateNextButtonStatus(isPhoneNumberInputValidated: isPhoneNumberInputValidated);
         },
         inputDecoration: const InputDecoration(
           hintText: phoneNumberText,
@@ -40,8 +42,8 @@ class _PhoneNumberSignInSectionState extends State<PhoneNumberSignInSection> {
         autoValidateMode: AutovalidateMode.onUserInteraction,
         initialValue: initialPhone,
         formatInput: false,
-      autoFocus: false,
-      autoFocusSearch: false,
+        autoFocus: false,
+        autoFocusSearch: false,
         inputBorder: const OutlineInputBorder(),
       ),
     );
