@@ -7,6 +7,9 @@ I had a challange, I needed to **adapt** a nice design for my project, and I did
 
 You can see below the my Dribbble UI challange, and screenshots & gifs from the application. Feel free to use.
 
+### Important update:
+With last commit, you can use the project with Dependency Injection & DartZ. If you do not familiar with Dependency Injection or DartZ, you can use the previous codes, which before the 31 May (There are no any DI or DartZ codes). For this, open commits, and get the codes. For latest codes (with DI and DartZ), you can use directly.
+
 ### Packages:
 *  auto_size_text
 *  intl_phone_number_input
@@ -19,11 +22,15 @@ You can see below the my Dribbble UI challange, and screenshots & gifs from the 
 *  cupertino_icons
 *  flutter_bloc
 *  freezed_annotation
+*  injectable
+*  get_it
+*  dartz
 *  firebase_core
 *  firebase_auth
 *  build_runner
 *  freezed
 *  auto_route_generator
+*  injectable_generator
 
 ## Warnings! READ BEFORE USING:
 Since the firebase project keys are private, I did not share them. If you want to use this application, first you **must** complete the firebase authentication process. 
