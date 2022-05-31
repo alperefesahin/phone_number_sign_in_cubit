@@ -20,10 +20,26 @@ List<Widget> topSectionOfThePage({required Size size}) {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: const [
-          Icon(Icons.phone_android, size: 50, color: Colors.white),
-          Icon(Icons.sms, size: 50, color: Colors.white),
-          Icon(Icons.more_horiz, size: 50, color: Colors.white),
-          Icon(CupertinoIcons.check_mark_circled_solid, size: 50, color: Colors.white),
+          Icon(
+            Icons.phone_android,
+            size: 50,
+            color: Colors.white,
+          ),
+          Icon(
+            Icons.sms,
+            size: 50,
+            color: Colors.white,
+          ),
+          Icon(
+            Icons.more_horiz,
+            size: 50,
+            color: Colors.white,
+          ),
+          Icon(
+            CupertinoIcons.check_mark_circled_solid,
+            size: 50,
+            color: Colors.white,
+          ),
         ],
       ),
     ),

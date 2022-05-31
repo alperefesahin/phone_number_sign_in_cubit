@@ -5,9 +5,8 @@ import 'package:phone_number_sign_in/presentation/common_widgets/colors.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class VerificationPinField extends StatelessWidget {
-  const VerificationPinField({Key? key, required this.state}) : super(key: key);
+  const VerificationPinField({Key? key}) : super(key: key);
 
-  final PhoneNumberSignInState state;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -31,21 +30,28 @@ class VerificationPinField extends StatelessWidget {
             appContext: context,
             length: 6,
             onChanged: (String smsCode) {
-              context.read<PhoneNumberSignInCubit>().smsCodeChanged(smsCode: smsCode);
+              context.read<PhoneNumberSignInCubit>().smsCodeChanged(
+                    smsCode: smsCode,
+                  );
             },
             textStyle: const TextStyle(color: whiteColor),
             keyboardType: TextInputType.phone,
             hintCharacter: "-",
             hintStyle: const TextStyle(color: whiteColor),
             pinTheme: PinTheme(
-                fieldOuterPadding: const EdgeInsets.only(left: 5, right: 5, top: 8),
-                shape: PinCodeFieldShape.box,
-                borderRadius: BorderRadius.circular(5),
-                fieldHeight: 60,
-                fieldWidth: 45,
-                inactiveColor: customIndigoBackgroundColor,
-                activeColor: customIndigoBackgroundColor,
-                selectedColor: customIndigoBackgroundColor),
+              fieldOuterPadding: const EdgeInsets.only(
+                left: 5,
+                right: 5,
+                top: 8,
+              ),
+              shape: PinCodeFieldShape.box,
+              borderRadius: BorderRadius.circular(5),
+              fieldHeight: 60,
+              fieldWidth: 45,
+              inactiveColor: customIndigoBackgroundColor,
+              activeColor: customIndigoBackgroundColor,
+              selectedColor: customIndigoBackgroundColor,
+            ),
           ),
         ],
       ),

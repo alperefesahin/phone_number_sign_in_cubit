@@ -1,17 +1,24 @@
+// ignore_for_file: depend_on_referenced_packages
 import 'dart:async';
-// ignore: depend_on_referenced_packages
 import 'package:bloc/bloc.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
 import 'package:phone_number_sign_in/domain/auth/auth_failure.dart';
+import 'package:phone_number_sign_in/domain/auth/i_auth_service.dart';
+import 'package:phone_number_sign_in/injection.dart';
 part 'phone_number_sign_in_cubit.freezed.dart';
 part 'phone_number_sign_in_state.dart';
 
+@Injectable()
 class PhoneNumberSignInCubit extends Cubit<PhoneNumberSignInState> {
-  PhoneNumberSignInCubit() : super(PhoneNumberSignInState.initial());
+  StreamSubscription<Either<AuthFailure, String>>? _phoneNumberSignInSubscription;
+  late final IAuthService _authService;
+  final Duration verificationCodeTimeout = const Duration(seconds: 60);
 
-  final _authService = FirebaseAuth.instance;
-
+  PhoneNumberSignInCubit() : super(PhoneNumberSignInState.empty()) {
+    _authService = getIt<IAuthService>();
+  }
   void phoneNumberChanged({required String phoneNumber}) {
     emit(
       state.copyWith(
@@ -20,7 +27,9 @@ class PhoneNumberSignInCubit extends Cubit<PhoneNumberSignInState> {
     );
   }
 
-  void updateNextButtonStatus({required bool isPhoneNumberInputValidated}) {
+  void updateNextButtonStatus({
+    required bool isPhoneNumberInputValidated,
+  }) {
     emit(
       state.copyWith(
         isPhoneNumberInputValidated: isPhoneNumberInputValidated,
@@ -28,7 +37,9 @@ class PhoneNumberSignInCubit extends Cubit<PhoneNumberSignInState> {
     );
   }
 
-  void smsCodeChanged({required String smsCode}) {
+  void smsCodeChanged({
+    required String smsCode,
+  }) {
     emit(
       state.copyWith(
         smsCode: smsCode,
@@ -39,79 +50,89 @@ class PhoneNumberSignInCubit extends Cubit<PhoneNumberSignInState> {
   void reset() {
     emit(
       state.copyWith(
-        failureMessage: null,
-        verificationId: "",
+        failureMessageOption: none(),
+        verificationIdOption: none(),
+        phoneNumber: "",
+        smsCode: "",
         isInProgress: false,
         isPhoneNumberInputValidated: false,
       ),
     );
   }
 
-  Future verifySmsCode() async {
-    try {
-      emit(state.copyWith(isInProgress: true));
-      final PhoneAuthCredential credential = PhoneAuthProvider.credential(
-        verificationId: state.verificationId,
-        smsCode: state.smsCode,
-      );
-      await _authService.signInWithCredential(credential).then(
-            (value) => emit(
+  @override
+  Future<void> close() async {
+    await _phoneNumberSignInSubscription?.cancel();
+    return super.close();
+  }
+
+  void verifySmsCode() {
+    state.verificationIdOption.fold(
+      () {
+        //Verification id does not exist. This should not happen.
+      },
+      (String verificationId) async {
+        emit(
+          state.copyWith(
+            isInProgress: true,
+            failureMessageOption: none(),
+          ),
+        );
+        final Either<AuthFailure, Unit> failureOrSuccess =
+            await _authService.verifySmsCode(smsCode: state.smsCode, verificationId: verificationId);
+        failureOrSuccess.fold(
+          (AuthFailure failure) {
+            emit(
+              state.copyWith(
+                failureMessageOption: some(failure),
+                isInProgress: false,
+              ),
+            );
+          },
+          (Unit _) {
+            emit(
               state.copyWith(
                 isInProgress: false,
               ),
-            ),
-          );
-    } on FirebaseAuthException catch (e) {
-      if (e.code == "session-expired") {
-        emit(
-          state.copyWith(
-            failureMessage: const AuthFailure.sessionExpired(),
-            isInProgress: false,
-          ),
+            );
+          },
         );
-      } else if (e.code == "ınvalıd-verıfıcatıon-code" || e.code == "invalid-verification-code") {
-        emit(
-          state.copyWith(
-            failureMessage: const AuthFailure.invalidVerificationCode(),
-            isInProgress: false,
-          ),
-        );
-      }
-    }
-  }
-
-  void signInWithPhoneNumber({required String phoneNumber}) {
-    emit(state.copyWith(isInProgress: true));
-    _authService.verifyPhoneNumber(
-      phoneNumber: phoneNumber,
-      verificationCompleted: (PhoneAuthCredential credential) async {
-        //! Android Only!!!
-        await _authService.signInWithCredential(credential);
-      },
-      codeSent: (String verificationId, int? resendToken) async {
-        emit(state.copyWith(
-          verificationId: verificationId,
-          isInProgress: false,
-        ));
-      },
-      verificationFailed: (FirebaseAuthException e) {
-        late final AuthFailure result;
-        if (e.code == 'too-many-requests') {
-          result = const AuthFailure.tooManyRequests();
-        } else if (e.code == 'app-not-authorized') {
-          result = const AuthFailure.deviceNotSupported();
-        } else {
-          result = const AuthFailure.serverError();
-        }
-
-        emit(state.copyWith(failureMessage: result, isInProgress: false));
-      },
-      codeAutoRetrievalTimeout: (String verificationId) {
-        emit(state.copyWith(
-          failureMessage: const AuthFailure.smsTimeout(),
-          isInProgress: false,
-        ));
       },
     );
+  }
+
+  void signInWithPhoneNumber() {
+    emit(
+      state.copyWith(
+        isInProgress: true,
+        failureMessageOption: none(),
+      ),
+    );
+
+    _phoneNumberSignInSubscription = _authService
+        .signInWithPhoneNumber(
+          phoneNumber: state.phoneNumber,
+          timeout: verificationCodeTimeout,
+        )
+        .listen(
+          (Either<AuthFailure, String> failureOrVerificationId) => failureOrVerificationId.fold(
+            (AuthFailure failure) {
+              emit(
+                state.copyWith(
+                  failureMessageOption: some(failure),
+                  isInProgress: false,
+                ),
+              );
+            },
+            (String verificationId) {
+              emit(
+                state.copyWith(
+                  verificationIdOption: some(verificationId),
+                  isInProgress: false,
+                ),
+              );
+            },
+          ),
+        );
   }
 }

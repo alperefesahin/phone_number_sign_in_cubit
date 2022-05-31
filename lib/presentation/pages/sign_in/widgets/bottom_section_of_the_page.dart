@@ -1,18 +1,18 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:auto_size_text/auto_size_text.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:phone_number_sign_in/application/auth/phone_number_sign_in/phone_number_sign_in_cubit.dart';
 import 'package:phone_number_sign_in/presentation/common_widgets/colors.dart';
+import 'package:phone_number_sign_in/presentation/common_widgets/custom_text.dart';
 import 'package:phone_number_sign_in/presentation/pages/sign_in/constants/texts.dart';
 import 'package:phone_number_sign_in/presentation/pages/sign_in/widgets/phone_number_sign_in_section.dart';
 import 'package:phone_number_sign_in/presentation/routes/router.gr.dart';
 
 class BottomSectionOfThePage extends StatelessWidget {
-  const BottomSectionOfThePage({Key? key, required this.size, required this.state}) : super(key: key);
+  const BottomSectionOfThePage({Key? key, required this.size}) : super(key: key);
 
   final Size size;
-  final PhoneNumberSignInState state;
 
   @override
   Widget build(BuildContext context) {
@@ -38,36 +38,41 @@ class BottomSectionOfThePage extends StatelessWidget {
                       padding: const EdgeInsets.only(top: 30, left: 30),
                       child: Row(
                         children: const [
-                          AutoSizeText(
-                            personalInformationText,
+                          CustomText(
+                            text: personalInformationText,
                             minFontSize: 20,
                             maxFontSize: 25,
-                            style: TextStyle(fontWeight: FontWeight.w600),
+                            textPadding: EdgeInsets.only(),
+                            textStyle: TextStyle(
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
                           Padding(
                             padding: EdgeInsets.only(left: 10),
-                            child: Icon(Icons.arrow_forward_ios, size: 15),
+                            child: Icon(
+                              Icons.arrow_forward_ios,
+                              size: 15,
+                            ),
                           ),
                         ],
                       ),
                     ),
-                    const PhoneNumberSignInSection(),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 45),
-                      child: AutoSizeText(
-                        smsInformationMessage,
-                        minFontSize: 15,
-                        maxFontSize: 20,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: customGreyColor),
+                    PhoneNumberSignInSection(
+                      state: state,
+                    ),
+                    const CustomText(
+                      text: smsInformationMessage,
+                      minFontSize: 15,
+                      maxFontSize: 20,
+                      textPadding: EdgeInsets.symmetric(
+                        horizontal: 25,
+                        vertical: 45,
                       ),
                     ),
                     InkWell(
                       onTap: () {
                         if (state.isPhoneNumberInputValidated) {
-                          context.read<PhoneNumberSignInCubit>().signInWithPhoneNumber(
-                                phoneNumber: state.phoneNumber,
-                              );
+                          context.read<PhoneNumberSignInCubit>().signInWithPhoneNumber();
                           AutoRouter.of(context).navigate(
                             SignInVerificationRoute(state: state),
                           );
@@ -78,7 +83,9 @@ class BottomSectionOfThePage extends StatelessWidget {
                         height: 85,
                         decoration: BoxDecoration(
                           color: customIndigoColor,
-                          borderRadius: const BorderRadius.all(Radius.circular(60)),
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(60),
+                          ),
                           boxShadow: [
                             BoxShadow(
                               color: customIndigoColor.withOpacity(0.5),
@@ -88,7 +95,11 @@ class BottomSectionOfThePage extends StatelessWidget {
                             ),
                           ],
                         ),
-                        child: const Icon(Icons.arrow_forward, size: 40, color: whiteColor),
+                        child: const Icon(
+                          Icons.arrow_forward,
+                          size: 40,
+                          color: whiteColor,
+                        ),
                       ),
                     )
                   ],

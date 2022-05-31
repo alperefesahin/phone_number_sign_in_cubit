@@ -17,7 +17,7 @@ class SignInPageBody extends StatelessWidget {
           alignment: Alignment.topCenter,
           children: [
             ...topSectionOfThePage(size: size),
-            BottomSectionOfThePage(state: state, size: size),
+            BottomSectionOfThePage(size: size),
           ],
         );
       },

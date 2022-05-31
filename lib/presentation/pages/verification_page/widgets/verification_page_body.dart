@@ -1,11 +1,9 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:phone_number_sign_in/application/auth/phone_number_sign_in/phone_number_sign_in_cubit.dart';
 import 'package:phone_number_sign_in/presentation/common_widgets/colors.dart';
 import 'package:phone_number_sign_in/presentation/common_widgets/custom_progress_indicator.dart';
+import 'package:phone_number_sign_in/presentation/common_widgets/custom_text.dart';
 import 'package:phone_number_sign_in/presentation/pages/verification_page/constants/texts.dart';
 import 'package:phone_number_sign_in/presentation/pages/verification_page/widgets/resend_code_button.dart';
 import 'package:phone_number_sign_in/presentation/pages/verification_page/widgets/verification_confirm_button.dart';
@@ -38,22 +36,26 @@ class VerificationPageBody extends StatelessWidget {
                             child: Row(
                               children: const [
                                 Padding(
-                                  padding: EdgeInsets.only(right: 20, top: 5),
+                                  padding: EdgeInsets.only(
+                                    right: 20,
+                                    top: 5,
+                                  ),
                                   child: Icon(
                                     Icons.check_rounded,
                                     size: 25,
                                     color: whiteColor,
                                   ),
                                 ),
-                                AutoSizeText(
-                                  confirmationText,
+                                CustomText(
+                                  text: confirmationText,
                                   minFontSize: 30,
                                   maxFontSize: 35,
-                                  style: TextStyle(
+                                  textPadding: EdgeInsets.only(),
+                                  textStyle: TextStyle(
                                     color: whiteColor,
                                     fontWeight: FontWeight.w600,
                                   ),
-                                )
+                                ),
                               ],
                             ),
                           ),
@@ -65,7 +67,11 @@ class VerificationPageBody extends StatelessWidget {
                             ),
                             child: Row(
                               children: [
-                                const Icon(Icons.vibration, size: 50, color: whiteColor),
+                                const Icon(
+                                  Icons.vibration,
+                                  size: 50,
+                                  color: whiteColor,
+                                ),
                                 Expanded(
                                   child: Padding(
                                     padding: const EdgeInsets.only(left: 25),
@@ -97,7 +103,7 @@ class VerificationPageBody extends StatelessWidget {
                               ],
                             ),
                           ),
-                          VerificationPinField(state: state),
+                          const VerificationPinField(),
                           const ResendCodeButton(),
                           VerificationConfirmButton(state: state)
                         ],

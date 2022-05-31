@@ -14,9 +14,13 @@ class LandingPage extends StatelessWidget {
       state: context.select((AuthCubit cubit) => cubit.state),
       onGeneratePages: (authState, pages) {
         if (authState.isUserLoggedIn) {
-          return [HomePage.page()];
+          return [
+            HomePage.page(),
+          ];
         } else {
-          return [SignInPage.page()];
+          return [
+            SignInPage.page(),
+          ];
         }
       },
     );

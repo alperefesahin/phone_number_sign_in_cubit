@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AuthState {
   AuthUserModel get userModel => throw _privateConstructorUsedError;
   bool get isUserLoggedIn => throw _privateConstructorUsedError;
+  bool get isInProgress => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AuthStateCopyWith<AuthState> get copyWith =>
@@ -28,7 +29,7 @@ mixin _$AuthState {
 abstract class $AuthStateCopyWith<$Res> {
   factory $AuthStateCopyWith(AuthState value, $Res Function(AuthState) then) =
       _$AuthStateCopyWithImpl<$Res>;
-  $Res call({AuthUserModel userModel, bool isUserLoggedIn});
+  $Res call({AuthUserModel userModel, bool isUserLoggedIn, bool isInProgress});
 
   $AuthUserModelCopyWith<$Res> get userModel;
 }
@@ -45,6 +46,7 @@ class _$AuthStateCopyWithImpl<$Res> implements $AuthStateCopyWith<$Res> {
   $Res call({
     Object? userModel = freezed,
     Object? isUserLoggedIn = freezed,
+    Object? isInProgress = freezed,
   }) {
     return _then(_value.copyWith(
       userModel: userModel == freezed
@@ -54,6 +56,10 @@ class _$AuthStateCopyWithImpl<$Res> implements $AuthStateCopyWith<$Res> {
       isUserLoggedIn: isUserLoggedIn == freezed
           ? _value.isUserLoggedIn
           : isUserLoggedIn // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isInProgress: isInProgress == freezed
+          ? _value.isInProgress
+          : isInProgress // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -72,7 +78,7 @@ abstract class _$$_AuthStateCopyWith<$Res> implements $AuthStateCopyWith<$Res> {
           _$_AuthState value, $Res Function(_$_AuthState) then) =
       __$$_AuthStateCopyWithImpl<$Res>;
   @override
-  $Res call({AuthUserModel userModel, bool isUserLoggedIn});
+  $Res call({AuthUserModel userModel, bool isUserLoggedIn, bool isInProgress});
 
   @override
   $AuthUserModelCopyWith<$Res> get userModel;
@@ -92,6 +98,7 @@ class __$$_AuthStateCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
   $Res call({
     Object? userModel = freezed,
     Object? isUserLoggedIn = freezed,
+    Object? isInProgress = freezed,
   }) {
     return _then(_$_AuthState(
       userModel: userModel == freezed
@@ -102,24 +109,32 @@ class __$$_AuthStateCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
           ? _value.isUserLoggedIn
           : isUserLoggedIn // ignore: cast_nullable_to_non_nullable
               as bool,
+      isInProgress: isInProgress == freezed
+          ? _value.isInProgress
+          : isInProgress // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_AuthState extends _AuthState {
-  const _$_AuthState({required this.userModel, required this.isUserLoggedIn})
-      : super._();
+class _$_AuthState implements _AuthState {
+  const _$_AuthState(
+      {required this.userModel,
+      required this.isUserLoggedIn,
+      required this.isInProgress});
 
   @override
   final AuthUserModel userModel;
   @override
   final bool isUserLoggedIn;
+  @override
+  final bool isInProgress;
 
   @override
   String toString() {
-    return 'AuthState(userModel: $userModel, isUserLoggedIn: $isUserLoggedIn)';
+    return 'AuthState(userModel: $userModel, isUserLoggedIn: $isUserLoggedIn, isInProgress: $isInProgress)';
   }
 
   @override
@@ -129,14 +144,17 @@ class _$_AuthState extends _AuthState {
             other is _$_AuthState &&
             const DeepCollectionEquality().equals(other.userModel, userModel) &&
             const DeepCollectionEquality()
-                .equals(other.isUserLoggedIn, isUserLoggedIn));
+                .equals(other.isUserLoggedIn, isUserLoggedIn) &&
+            const DeepCollectionEquality()
+                .equals(other.isInProgress, isInProgress));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(userModel),
-      const DeepCollectionEquality().hash(isUserLoggedIn));
+      const DeepCollectionEquality().hash(isUserLoggedIn),
+      const DeepCollectionEquality().hash(isInProgress));
 
   @JsonKey(ignore: true)
   @override
@@ -144,16 +162,18 @@ class _$_AuthState extends _AuthState {
       __$$_AuthStateCopyWithImpl<_$_AuthState>(this, _$identity);
 }
 
-abstract class _AuthState extends AuthState {
+abstract class _AuthState implements AuthState {
   const factory _AuthState(
       {required final AuthUserModel userModel,
-      required final bool isUserLoggedIn}) = _$_AuthState;
-  const _AuthState._() : super._();
+      required final bool isUserLoggedIn,
+      required final bool isInProgress}) = _$_AuthState;
 
   @override
   AuthUserModel get userModel => throw _privateConstructorUsedError;
   @override
   bool get isUserLoggedIn => throw _privateConstructorUsedError;
+  @override
+  bool get isInProgress => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_AuthStateCopyWith<_$_AuthState> get copyWith =>

@@ -14,12 +14,15 @@ linter:
     always_declare_return_types: true
 
 analyzer:
+  exclude:
+    - "**/*.freezed.dart"
+    - "**/*.config.dart"
+    - "**/*.g.dart"
+
   strong-mode:
-    implicit-casts: true
+  implicit-casts: true
 
   errors:
     missing_required_param: error
     must_be_immutable: error
     always_declare_return_types: warning
-
-
