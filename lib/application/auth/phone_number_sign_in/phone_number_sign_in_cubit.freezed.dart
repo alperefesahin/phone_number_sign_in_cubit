@@ -23,6 +23,8 @@ mixin _$PhoneNumberSignInState {
       throw _privateConstructorUsedError;
   bool get isInProgress => throw _privateConstructorUsedError;
   bool get isPhoneNumberInputValidated => throw _privateConstructorUsedError;
+  Tuple2<String, int?> get phoneNumberAndResendTokenPair =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PhoneNumberSignInStateCopyWith<PhoneNumberSignInState> get copyWith =>
@@ -40,7 +42,8 @@ abstract class $PhoneNumberSignInStateCopyWith<$Res> {
       Option<String> verificationIdOption,
       Option<AuthFailure> failureMessageOption,
       bool isInProgress,
-      bool isPhoneNumberInputValidated});
+      bool isPhoneNumberInputValidated,
+      Tuple2<String, int?> phoneNumberAndResendTokenPair});
 }
 
 /// @nodoc
@@ -60,6 +63,7 @@ class _$PhoneNumberSignInStateCopyWithImpl<$Res>
     Object? failureMessageOption = freezed,
     Object? isInProgress = freezed,
     Object? isPhoneNumberInputValidated = freezed,
+    Object? phoneNumberAndResendTokenPair = freezed,
   }) {
     return _then(_value.copyWith(
       phoneNumber: phoneNumber == freezed
@@ -86,6 +90,10 @@ class _$PhoneNumberSignInStateCopyWithImpl<$Res>
           ? _value.isPhoneNumberInputValidated
           : isPhoneNumberInputValidated // ignore: cast_nullable_to_non_nullable
               as bool,
+      phoneNumberAndResendTokenPair: phoneNumberAndResendTokenPair == freezed
+          ? _value.phoneNumberAndResendTokenPair
+          : phoneNumberAndResendTokenPair // ignore: cast_nullable_to_non_nullable
+              as Tuple2<String, int?>,
     ));
   }
 }
@@ -103,7 +111,8 @@ abstract class _$$_PhoneNumberSignInStateCopyWith<$Res>
       Option<String> verificationIdOption,
       Option<AuthFailure> failureMessageOption,
       bool isInProgress,
-      bool isPhoneNumberInputValidated});
+      bool isPhoneNumberInputValidated,
+      Tuple2<String, int?> phoneNumberAndResendTokenPair});
 }
 
 /// @nodoc
@@ -126,6 +135,7 @@ class __$$_PhoneNumberSignInStateCopyWithImpl<$Res>
     Object? failureMessageOption = freezed,
     Object? isInProgress = freezed,
     Object? isPhoneNumberInputValidated = freezed,
+    Object? phoneNumberAndResendTokenPair = freezed,
   }) {
     return _then(_$_PhoneNumberSignInState(
       phoneNumber: phoneNumber == freezed
@@ -152,6 +162,10 @@ class __$$_PhoneNumberSignInStateCopyWithImpl<$Res>
           ? _value.isPhoneNumberInputValidated
           : isPhoneNumberInputValidated // ignore: cast_nullable_to_non_nullable
               as bool,
+      phoneNumberAndResendTokenPair: phoneNumberAndResendTokenPair == freezed
+          ? _value.phoneNumberAndResendTokenPair
+          : phoneNumberAndResendTokenPair // ignore: cast_nullable_to_non_nullable
+              as Tuple2<String, int?>,
     ));
   }
 }
@@ -165,7 +179,8 @@ class _$_PhoneNumberSignInState extends _PhoneNumberSignInState {
       required this.verificationIdOption,
       required this.failureMessageOption,
       required this.isInProgress,
-      required this.isPhoneNumberInputValidated})
+      required this.isPhoneNumberInputValidated,
+      required this.phoneNumberAndResendTokenPair})
       : super._();
 
   @override
@@ -180,10 +195,12 @@ class _$_PhoneNumberSignInState extends _PhoneNumberSignInState {
   final bool isInProgress;
   @override
   final bool isPhoneNumberInputValidated;
+  @override
+  final Tuple2<String, int?> phoneNumberAndResendTokenPair;
 
   @override
   String toString() {
-    return 'PhoneNumberSignInState(phoneNumber: $phoneNumber, smsCode: $smsCode, verificationIdOption: $verificationIdOption, failureMessageOption: $failureMessageOption, isInProgress: $isInProgress, isPhoneNumberInputValidated: $isPhoneNumberInputValidated)';
+    return 'PhoneNumberSignInState(phoneNumber: $phoneNumber, smsCode: $smsCode, verificationIdOption: $verificationIdOption, failureMessageOption: $failureMessageOption, isInProgress: $isInProgress, isPhoneNumberInputValidated: $isPhoneNumberInputValidated, phoneNumberAndResendTokenPair: $phoneNumberAndResendTokenPair)';
   }
 
   @override
@@ -202,7 +219,10 @@ class _$_PhoneNumberSignInState extends _PhoneNumberSignInState {
                 .equals(other.isInProgress, isInProgress) &&
             const DeepCollectionEquality().equals(
                 other.isPhoneNumberInputValidated,
-                isPhoneNumberInputValidated));
+                isPhoneNumberInputValidated) &&
+            const DeepCollectionEquality().equals(
+                other.phoneNumberAndResendTokenPair,
+                phoneNumberAndResendTokenPair));
   }
 
   @override
@@ -213,7 +233,8 @@ class _$_PhoneNumberSignInState extends _PhoneNumberSignInState {
       const DeepCollectionEquality().hash(verificationIdOption),
       const DeepCollectionEquality().hash(failureMessageOption),
       const DeepCollectionEquality().hash(isInProgress),
-      const DeepCollectionEquality().hash(isPhoneNumberInputValidated));
+      const DeepCollectionEquality().hash(isPhoneNumberInputValidated),
+      const DeepCollectionEquality().hash(phoneNumberAndResendTokenPair));
 
   @JsonKey(ignore: true)
   @override
@@ -229,7 +250,8 @@ abstract class _PhoneNumberSignInState extends PhoneNumberSignInState {
           required final Option<String> verificationIdOption,
           required final Option<AuthFailure> failureMessageOption,
           required final bool isInProgress,
-          required final bool isPhoneNumberInputValidated}) =
+          required final bool isPhoneNumberInputValidated,
+          required final Tuple2<String, int?> phoneNumberAndResendTokenPair}) =
       _$_PhoneNumberSignInState;
   const _PhoneNumberSignInState._() : super._();
 
@@ -246,6 +268,9 @@ abstract class _PhoneNumberSignInState extends PhoneNumberSignInState {
   bool get isInProgress => throw _privateConstructorUsedError;
   @override
   bool get isPhoneNumberInputValidated => throw _privateConstructorUsedError;
+  @override
+  Tuple2<String, int?> get phoneNumberAndResendTokenPair =>
+      throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_PhoneNumberSignInStateCopyWith<_$_PhoneNumberSignInState> get copyWith =>

@@ -12,7 +12,7 @@ part 'phone_number_sign_in_state.dart';
 
 @Injectable()
 class PhoneNumberSignInCubit extends Cubit<PhoneNumberSignInState> {
-  StreamSubscription<Either<AuthFailure, String>>? _phoneNumberSignInSubscription;
+  StreamSubscription<Either<AuthFailure, Tuple2<String, int?>>>? _phoneNumberSignInSubscription;
   late final IAuthService _authService;
   final Duration verificationCodeTimeout = const Duration(seconds: 60);
 
@@ -67,6 +67,9 @@ class PhoneNumberSignInCubit extends Cubit<PhoneNumberSignInState> {
   }
 
   void verifySmsCode() {
+     if (state.isInProgress) {
+          return;
+        }
     state.verificationIdOption.fold(
       () {
         //Verification id does not exist. This should not happen.
@@ -102,20 +105,26 @@ class PhoneNumberSignInCubit extends Cubit<PhoneNumberSignInState> {
   }
 
   void signInWithPhoneNumber() {
+    if (state.isInProgress) {
+      return;
+    }
     emit(
       state.copyWith(
         isInProgress: true,
         failureMessageOption: none(),
       ),
     );
-
+    _phoneNumberSignInSubscription?.cancel();
     _phoneNumberSignInSubscription = _authService
         .signInWithPhoneNumber(
           phoneNumber: state.phoneNumber,
           timeout: verificationCodeTimeout,
+          resendToken: state.phoneNumber != state.phoneNumberAndResendTokenPair.value1
+              ? null
+              : state.phoneNumberAndResendTokenPair.value2,
         )
         .listen(
-          (Either<AuthFailure, String> failureOrVerificationId) => failureOrVerificationId.fold(
+          (Either<AuthFailure, Tuple2<String, int?>> failureOrVerificationId) => failureOrVerificationId.fold(
             (AuthFailure failure) {
               emit(
                 state.copyWith(
@@ -124,11 +133,15 @@ class PhoneNumberSignInCubit extends Cubit<PhoneNumberSignInState> {
                 ),
               );
             },
-            (String verificationId) {
+            (Tuple2<String, int?> verificationIdResendTokenPair) {
               emit(
                 state.copyWith(
-                  verificationIdOption: some(verificationId),
+                  verificationIdOption: some(verificationIdResendTokenPair.value1),
                   isInProgress: false,
+                  phoneNumberAndResendTokenPair: tuple2(
+                    state.phoneNumber,
+                    verificationIdResendTokenPair.value2,
+                  ),
                 ),
               );
             },
