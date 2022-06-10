@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:phone_number_sign_in/application/auth/phone_number_sign_in/phone_number_sign_in_cubit.dart';
 import 'package:phone_number_sign_in/presentation/common_widgets/colors.dart';
 import 'package:phone_number_sign_in/presentation/common_widgets/custom_text.dart';
 import 'package:phone_number_sign_in/presentation/pages/verification_page/constants/texts.dart';
@@ -11,7 +13,9 @@ class ResendCodeButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 25, left: 25),
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          context.read<PhoneNumberSignInCubit>().signInWithPhoneNumber();
+        },
         splashColor: transparentColor,
         highlightColor: transparentColor,
         child: Padding(
