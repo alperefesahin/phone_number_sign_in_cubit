@@ -9,6 +9,7 @@ class PhoneNumberSignInState with _$PhoneNumberSignInState {
     required Option<AuthFailure> failureMessageOption,
     required bool isInProgress,
     required bool isPhoneNumberInputValidated,
+    required Tuple2<String, int?> phoneNumberAndResendTokenPair,
   }) = _PhoneNumberSignInState;
   const PhoneNumberSignInState._();
 
@@ -19,5 +20,6 @@ class PhoneNumberSignInState with _$PhoneNumberSignInState {
         isPhoneNumberInputValidated: false,
         failureMessageOption: none(),
         verificationIdOption: none(),
+        phoneNumberAndResendTokenPair: tuple2("", null),
       );
 }
